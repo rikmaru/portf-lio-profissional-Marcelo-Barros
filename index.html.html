@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antonio Marcelo Barros Ribeiro | Portfólio de Engenharia & Automação</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIÁVEIS E CONFIGURAÇÕES BASE --- */
+        :root {
+            --bg-principal: #0a0c10;
+            --bg-secundario: #121620;
+            --bg-card: #171d2c;
+            --cor-acento: #00f0ff;
+            --cor-acento-rgb: 0, 240, 255;
+            --texto-principal: #f8fafc;
+            --texto-secundario: #94a3b8;
+            --borda: rgba(255, 255, 255, 0.06);
+            --transicao: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --font-head: 'Outfit', sans-serif;
+            --font-body: 'Source Sans 3', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-principal);
+            color: var(--texto-principal);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-head);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: var(--transicao);
+        }
+
+        section {
+            padding: 100px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .revelar {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .revelar.visivel {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HEADER / NAVBAR --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--borda);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background: rgba(10, 12, 16, 0.7);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .logo span {
+            color: var(--cor-acento);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            color: var(--texto-secundario);
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--cor-acento);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 140px;
+        }
+
+        .hero-tag {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--cor-acento);
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            font-weight: 700;
+            max-width: 900px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--texto-secundario);
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            font-family: var(--font-head);
+            cursor: pointer;
+            transition: var(--transicao);
+        }
+
+        .btn-primario {
+            background-color: var(--cor-acento);
+            color: var(--bg-principal);
+            border: none;
+        }
+
+        .btn-primario:hover {
+            background-color: #55f7ff;
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+        }
+
+        .btn-secundario {
+            border: 1px solid var(--borda);
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--texto-principal);
+        }
+
+        .btn-secundario:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* --- SOBRE MIM --- */
+        .secao-titulo {
+            font-size: 2rem;
+            margin-bottom: 48px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .secao-titulo::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 40px;
+            height: 2px;
+            background-color: var(--cor-acento);
+        }
+
+        .grid-sobre {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 64px;
+            align-items: start;
+        }
+
+        .conteudo-sobre p {
+            color: var(--texto-secundario);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .titulo-skills {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .tag-skill {
+            background: var(--bg-secundario);
+            border: 1px solid var(--borda);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--texto-secundario);
+            transition: var(--transicao);
+        }
+
+        /* --- PROJETOS --- */
+        .grid-projetos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card-projeto {
+            background: var(--bg-secundario);
+            border: 1px solid var(--borda);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: var(--transicao);
+        }
+
+        /* AJUSTE FIEL DE RESOLUÇÃO E DIMENSÃO BASEADO NAS IMAGENS DO PORTFÓLIO (PROPORÇÃO 16:9 WIDESCREEN) */
+        .wrapper-imagem-projeto {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #0f1319;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--borda);
+        }
+
+        .wrapper-imagem-projeto img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transicao);
+        }
+
+        .card-projeto:hover .wrapper-imagem-projeto img {
+            transform: scale(1.03);
+        }
+
+        .corpo-projeto {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        .card-projeto h3 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--texto-principal);
+        }
+
+        .card-projeto p {
+            color: var(--texto-secundario);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .footer-projeto {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .badge-tecnologia {
+            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px 10px;
+            border-radius: 4px;
+            color: var(--texto-secundario);
+        }
+
+        /* --- TIMELINE --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--borda);
+        }
+
+        .item-timeline {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 48px;
+        }
+
+        .item-timeline::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--bg-principal);
+            border: 2px solid var(--cor-acento);
+        }
+
+        .header-timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+            gap: 8px;
+        }
+
+        .cargo-timeline {
+            font-size: 1.2rem;
+            color: var(--texto-principal);
+            font-weight: 500;
+        }
+
+        .empresa-timeline {
+            color: var(--cor-acento);
+            font-weight: 400;
+        }
+
+        .periodo-timeline {
+            font-size: 0.9rem;
+            color: var(--texto-secundario);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            border-top: 1px solid var(--borda);
+            background: var(--bg-secundario);
+            padding: 60px 24px;
+            text-align: center;
+        }
+
+        .conteudo-footer {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .copy {
+            font-size: 0.85rem;
+            color: rgba(148, 163, 184, 0.5);
+        }
+
+        /* --- ADMIN ENGINE V2 --- */
+        .modo-admin [contenteditable="true"] {
+            outline: 1px dashed var(--cor-acento) !important;
+            padding: 2px 4px;
+            background: rgba(0, 240, 255, 0.04);
+            border-radius: 4px;
+        }
+
+        .input-imagem-projeto {
+            display: none;
+            width: calc(100% - 24px);
+            margin: 12px auto 0 auto;
+            padding: 8px;
+            background: var(--bg-principal);
+            border: 1px solid var(--cor-acento);
+            color: var(--texto-principal);
+            font-size: 0.8rem;
+            border-radius: 4px;
+        }
+
+        .modo-admin .input-imagem-projeto {
+            display: block;
+        }
+
+        .painel-admin-flutuante {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #1e293b;
+            border: 1px solid var(--cor-acento);
+            padding: 12px 24px;
+            border-radius: 50px;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
+            z-index: 2000;
+            display: none;
+            gap: 12px;
+        }
+
+        .btn-admin-acao {
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-salvar { background: #10b981; color: white; }
+        .btn-adicionar { background: #3b82f6; color: white; }
+        .btn-cancelar { background: #ef4444; color: white; }
+
+        .btn-remover-projeto {
+            display: none;
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(239, 68, 68, 0.85);
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .modo-admin .btn-remover-projeto {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.3rem; }
+            .grid-sobre { grid-template-columns: 1fr; gap: 40px; }
+            section { padding: 60px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">AMBR<span>.</span></a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#projetos">Projetos</a></li>
+                    <li><a href="#experiencia">Experiência</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="conteudo-portfolio">
+        <!-- HERO SECTION -->
+        <section class="hero revelar visivel">
+            <div class="hero-tag" id="hero-tag" data-edit>Engenheiro de Controle e Automação</div>
+            <h1 id="hero-nome" data-edit>Antonio Marcelo Barros Ribeiro</h1>
+            <p id="hero-descricao" data-edit>Especialista em automação industrial, desenvolvimento de sistemas integrados, prototipagem eletromecânica e desenvolvimento backend, unindo engenharia de precisão com soluções inteligentes de software.</p>
+            <div class="btn-group">
+                <a href="#projetos" class="btn btn-primario">Ver Projetos</a>
+                <a href="https://linkedin.com/in/marcelo-barros-ribeiro-467723a7" target="_blank" rel="noopener noreferrer" class="btn btn-secundario" id="link-linkedin">LinkedIn</a>
+                <a href="https://github.com/rikmaru" target="_blank" rel="noopener noreferrer" class="btn btn-secundario" id="link-github">GitHub</a>
+            </div>
+        </section>
+
+        <!-- SOBRE MIM -->
+        <section id="sobre" class="grid-sobre revelar visivel">
+            <div>
+                <h2 class="secao-titulo" data-edit>Sobre mim</h2>
+                <div class="conteudo-sobre" id="texto-sobre">
+                    <p data-edit>Profissional com graduação em Engenharia de Controle e Automação, Análise e Desenvolvimento de Sistemas e Direito[cite: 1]. Possuo sólida base técnico-científica voltada para o desenvolvimento de soluções robustas em automação, programação de sistemas e inteligência aplicada[cite: 1].</p>
+                    <p data-edit>Atuo de ponta a ponta na criação de produtos tecnológicos, cobrindo desde o design de sistemas embarcados microcontrolados com sensores complexos até o desenvolvimento backend de interfaces de monitoramento[cite: 1]. Especialista em técnicas avançadas de prototipagem, manufatura aditiva (impressão 3D), modelagem tridimensional de alta fidelidade e engenharia reversa por meio de escaneamento 3D e fotogrametria[cite: 1].</p>
+                </div>
+            </div>
+            <div>
+                <h3 class="titulo-skills" data-edit>Competências Técnicas</h3>
+                <div class="container-tags" id="skills-lista">
+                    <span class="tag-skill" data-edit>Controle e Automação</span>
+                    <span class="tag-skill" data-edit>Arduino / ESP32</span>
+                    <span class="tag-skill" data-edit>Modelagem e Impressão 3D</span>
+                    <span class="tag-skill" data-edit>Fotogrametria</span>
+                    <span class="tag-skill" data-edit>Scanner 3D (Creality Ferret)</span>
+                    <span class="tag-skill" data-edit>Desenvolvimento Backend</span>
+                    <span class="tag-skill" data-edit>C / C++ / Python</span>
+                    <span class="tag-skill" data-edit>Integração de Sensores</span>
+                    <span class="tag-skill" data-edit>Prototipagem Rápida</span>
+                    <span class="tag-skill" data-edit>Banco de Dados SQL</span>
+                </div>
+
+                <h3 class="titulo-skills" data-edit>Afiliações e Registros</h3>
+                <div class="container-tags" id="registros-lista">
+                    <span class="tag-skill" data-edit style="border-color: rgba(0, 240, 255, 0.4);">CREA-MA Nº 1112290005-8</span>
+                    <span class="tag-skill" data-edit style="border-color: rgba(0, 240, 255, 0.4);">OAB-MA Nº 11192</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJETOS -->
+        <section id="projetos" class="revelar visivel">
+            <h2 class="secao-titulo" data-edit>Trabalhos & Projetos Desenvolvidos</h2>
+            <div class="grid-projetos" id="container-lista-projetos">
+                
+                <!-- Projeto 1 -->
+                <article class="card-projeto">
+                    <button class="btn-remover-projeto" onclick="removerProjeto(this)">Remover</button>
+                    <div class="wrapper-imagem-projeto">
+                        <img src="3_2.jpg" alt="Projeto" onerror="this.style.display='none'">
+                    </div>
+                    <input type="text" class="input-imagem-projeto" value="3_2.jpg" placeholder="Link Direto da Imagem (.jpg, .png)">
+                    <div class="corpo-projeto">
+                        <h3 data-edit>Braço Robótico Controlado por Aplicativo</h3>
+                        <p data-edit>Desenvolvimento estrutural e lógico de um braço mecânico articulado[cite: 1]. A estrutura física foi manufaturada integralmente via impressão 3D e acionada eletronicamente por servo motores coordenados por microcontrolador Arduino, respondendo a comandos diretos de uma interface mobile dedicada[cite: 1].</p>
+                        <div class="footer-projeto">
+                            <span class="badge-tecnologia" data-edit>Arduino</span>
+                            <span class="badge-tecnologia" data-edit>Servo Motores</span>
+                            <span class="badge-tecnologia" data-edit>Impressão 3D</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Projeto 2 -->
+                <article class="card-projeto">
+                    <button class="btn-remover-projeto" onclick="removerProjeto(this)">Remover</button>
+                    <div class="wrapper-imagem-projeto">
+                        <img src="9_2.jpg" alt="Projeto" onerror="this.style.display='none'">
+                    </div>
+                    <input type="text" class="input-imagem-projeto" value="9_2.jpg" placeholder="Link Direto da Imagem (.jpg, .png)">
+                    <div class="corpo-projeto">
+                        <h3 data-edit>Miniatura Funcional de Leito de UTI</h3>
+                        <p data-edit>Projeto de engenharia médica simulada desenvolvido sob demanda para o Hospital Universitário da UFMA (HU-UFMA)[cite: 1]. Utiliza microcontroladores estruturados na IDE do Arduino para processar dados de telemetria, reproduzir as assinaturas sonoras exatas de equipamentos de suporte à vida reais e renderizar gráficos em displays digitais[cite: 1].</p>
+                        <div class="footer-projeto">
+                            <span class="badge-tecnologia" data-edit>IDE Arduino</span>
+                            <span class="badge-tecnologia" data-edit>Displays</span>
+                            <span class="badge-tecnologia" data-edit>Manufatura 3D</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Projeto 3 -->
+                <article class="card-projeto">
+                    <button class="btn-remover-projeto" onclick="removerProjeto(this)">Remover</button>
+                    <div class="wrapper-imagem-projeto">
+                        <img src="8_2.jpg" alt="Projeto" onerror="this.style.display='none'">
+                    </div>
+                    <input type="text" class="input-imagem-projeto" value="8_2.jpg" placeholder="Link Direto da Imagem (.jpg, .png)">
+                    <div class="corpo-projeto">
+                        <h3 data-edit>Armadura Interativa Game-to-Life</h3>
+                        <p data-edit>Reconstrução em tamanho real da armadura do jogo Pixel Ripped[cite: 1]. O projeto integra modelagem geométrica complexa de blocos com uma malha eletrônica embarcada contendo sensores inerciais, botões, bancos de baterias regulados e displays operados por linhas de comando embarcadas programadas nativamente[cite: 1].</p>
+                        <div class="footer-projeto">
+                            <span class="badge-tecnologia" data-edit>C++</span>
+                            <span class="badge-tecnologia" data-edit>Sensores</span>
+                            <span class="badge-tecnologia" data-edit>Automação</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- EXPERIÊNCIA -->
+        <section id="experiencia" class="revelar visivel">
+            <h2 class="secao-titulo" data-edit>Histórico Profissional</h2>
+            <div class="timeline" id="timeline-experiencias">
+                <div class="item-timeline">
+                    <div class="header-timeline">
+                        <span class="cargo-timeline" data-edit>Assessor Jurídico</span>
+                        <span class="periodo-timeline" data-edit>Julho 2012 — Julho 2022</span>
+                    </div>
+                    <div class="empresa-timeline" style="margin-bottom: 12px;" data-edit>Prefeitura de São Luís — Secretaria Municipal de Saúde</div>
+                    <p class="desc-timeline" data-edit>Análise processual com foco em licitações, contratos administrativos e direito público[cite: 1]. Atuação na elaboração de pareceres técnicos, condução de sindicâncias e assessoramento estratégico de superintendências no gerenciamento de demandas institucionais complexas[cite: 1].</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTATO -->
+        <section id="contato" class="revelar visivel" style="text-align: center; padding-bottom: 40px;">
+            <h2 class="secao-titulo" data-edit>Vamos construir algo juntos?</h2>
+            <p style="color: var(--texto-secundario); max-width: 550px; margin: 0 auto 32px auto; font-size: 1.1rem;" data-edit>
+                Se você busca um profissional com visão holística capaz de integrar hardware moderno, linhas de código backend otimizadas e engenharia de precisão, entre em contato.
+            </p>
+            <a href="mailto:ambr1942@hotmail.com" class="btn btn-primario" style="margin-bottom: 20px;" id="btn-email-texto" data-edit>
+                ambr1942@hotmail.com
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="conteudo-footer">
+            <p class="copy" style="margin-bottom: 24px;">&copy; 2026 Antonio Marcelo Barros Ribeiro. Todos os direitos reservados.</p>
+            <button class="btn btn-secundario" id="btn-alternar-admin" style="font-size: 0.8rem; padding: 6px 16px;">Modo Edição</button>
+        </div>
+    </footer>
+
+    <!-- PAINEL ADMINISTRATIVO FLUTUANTE -->
+    <div class="painel-admin-flutuante" id="painel-admin">
+        <button class="btn-admin-acao btn-adicionar" id="btn-admin-adicionar">+ Adicionar Novo Projeto</button>
+        <button class="btn-admin-acao btn-salvar" id="btn-admin-salvar">Salvar Alterações</button>
+        <button class="btn-admin-acao btn-cancelar" id="btn-admin-cancelar">Sair</button>
+    </div>
+
+    <script>
+        // Função global de exclusão acessível pelos botões dinâmicos
+        function removerProjeto(botao) {
+            if(confirm("Deseja realmente remover este projeto?")) {
+                botao.closest('.card-projeto').remove();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnAlternarAdmin = document.getElementById('btn-alternar-admin');
+            const painelAdmin = document.getElementById('painel-admin');
+            const btnSalvar = document.getElementById('btn-admin-salvar');
+            const btnCancelar = document.getElementById('btn-admin-cancelar');
+            const btnAdicionar = document.getElementById('btn-admin-adicionar');
+            const portfolioContent = document.getElementById('conteudo-portfolio');
+            const containerProjetos = document.getElementById('container-lista-projetos');
+
+            // Recupera persistência do LocalStorage
+            if (localStorage.getItem('portfolio_HTML_dados_v2')) {
+                portfolioContent.innerHTML = localStorage.getItem('portfolio_HTML_dados_v2');
+            }
+            
+            sincronizarComportamentoImagens();
+
+            // Ativa Modo Admin Visual
+            btnAlternarAdmin.addEventListener('click', () => {
+                document.body.classList.add('modo-admin');
+                painelAdmin.style.display = 'flex';
+                
+                document.querySelectorAll('[data-edit]').forEach(el => {
+                    el.setAttribute('contenteditable', 'true');
+                });
+                btnAlternarAdmin.style.display = 'none';
+            });
+
+            // Insere dinamicamente um novo espaço de projeto com a proporção exata configurada
+            btnAdicionar.addEventListener('click', () => {
+                const novoCard = document.createElement('article');
+                novoCard.className = 'card-projeto';
+                novoCard.innerHTML = `
+                    <button class="btn-remover-projeto" onclick="removerProjeto(this)">Remover</button>
+                    <div class="wrapper-imagem-projeto">
+                        <img src="" alt="Projeto" style="display:none;" onerror="this.style.display='none'">
+                    </div>
+                    <input type="text" class="input-imagem-projeto" value="" placeholder="Link Direto da Imagem (.jpg, .png)">
+                    <div class="corpo-projeto">
+                        <h3 contenteditable="true" data-edit>Título do Novo Projeto</h3>
+                        <p contenteditable="true" data-edit>Insira a descrição detalhada do escopo do projeto, sensores e microcontroladores utilizados na sua arquitetura.</p>
+                        <div class="footer-projeto">
+                            <span class="badge-tecnologia" contenteditable="true" data-edit>Tecnologia 1</span>
+                            <span class="badge-tecnologia" contenteditable="true" data-edit>Tecnologia 2</span>
+                        </div>
+                    </div>
+                `;
+                containerProjetos.appendChild(novoCard);
+                sincronizarComportamentoImagens();
+            });
+
+            btnCancelar.addEventListener('click', () => {
+                window.location.reload();
+            });
+
+            // Geração e consolidação estrutural dos dados editados
+            btnSalvar.addEventListener('click', () => {
+                document.querySelectorAll('[data-edit]').forEach(el => {
+                    el.removeAttribute('contenteditable');
+                });
+
+                document.querySelectorAll('.card-projeto').forEach(card => {
+                    const input = card.querySelector('.input-imagem-projeto');
+                    const img = card.querySelector('.wrapper-imagem-projeto img');
+                    if (input && img) {
+                        let url = input.value.trim();
+                        img.src = url;
+                        img.style.display = url ? 'block' : 'none';
+                        input.setAttribute('value', url); // Fixa o valor na árvore do HTML
+                    }
+                });
+
+                document.body.classList.remove('modo-admin');
+                painelAdmin.style.display = 'none';
+                btnAlternarAdmin.style.display = 'inline-block';
+
+                localStorage.setItem('portfolio_HTML_dados_v2', portfolioContent.innerHTML);
+                alert('Alterações salvas com sucesso!');
+                window.location.reload();
+            });
+
+            // Escuta mudanças nos inputs de imagem em tempo real
+            function sincronizarComportamentoImagens() {
+                document.querySelectorAll('.card-projeto').forEach(card => {
+                    const input = card.querySelector('.input-imagem-projeto');
+                    const img = card.querySelector('.wrapper-imagem-projeto img');
+                    
+                    if (input && img) {
+                        if(input.value) {
+                            img.src = input.value;
+                            img.style.display = 'block';
+                        }
+                        // Input Listener ativo
+                        input.removeEventListener('input', handleImageInput);
+                        input.addEventListener('input', handleImageInput);
+                    }
+                });
+            }
+
+            function handleImageInput(e) {
+                const img = e.target.closest('.card-projeto').querySelector('.wrapper-imagem-projeto img');
+                if(img) {
+                    img.src = e.target.value.trim();
+                    img.style.display = e.target.value.trim() ? 'block' : 'none';
+                }
+            }
+
+            // Fade-in effect
+            const elementos = document.querySelectorAll('.revelar');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visivel');
+                });
+            }, { threshold: 0.1 });
+            elementos.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
